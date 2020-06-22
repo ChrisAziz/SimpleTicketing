@@ -1,0 +1,31 @@
+<h1>Tickets</h1>
+
+<p *ngIf="!(tickets$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">Create Ticket</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(tickets$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Ticket Number</th>
+      <th>Title</th>
+      <th>Requester</th>
+      <th>Date Created</th>
+      <th>Solved?</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ticket of (tickets$ | async)">
+      <td>{{ ticket.ticketId }}</td>
+      <td><a [routerLink]="['/ticket/', ticket.ticketId]">{{ ticket.title }}</a></td>
+      <td>{{ ticket.requester }}</td>
+      <td>{{ ticket.dt | date: "dd.MM.y" }}</td>
+      <td>{{ ticket.solved }}</td>
+      <td><a [routerLink]="['/ticket/edit/', ticket.ticketId]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="deleteTicket(ticket.ticketId)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

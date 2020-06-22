@@ -1,0 +1,12 @@
+<ng-container *ngIf="(ticket$ | async) as ticket; else loading">
+
+    <h1>#{{ticket.ticketId}}: {{ ticket.title }}</h1>
+    <div>{{ ticket.body }}</div>
+    <ul>
+      <li>{{ ticket.requester }}</li>
+      <li>{{ ticket.dt }}</li>
+      <li>{{ ticket.solved }}</li>
+    </ul>
+  
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>
